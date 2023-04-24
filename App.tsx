@@ -16,6 +16,19 @@ import Home from './src/modules/home/Home'
 import { RouteParams } from './src/routeParams'
 import { GREEN_700 } from './src/shared/ui/colors'
 
+import { AllCalculators } from '@modules/calculators/calculatorsEnum'
+import AlcoholInBlood from '@modules/calculators/pages/AlcoholInBlood'
+import BodySurface from '@modules/calculators/pages/BodySurface'
+import Calcium from '@modules/calculators/pages/Calcium'
+import Calories from '@modules/calculators/pages/Calories'
+import GestationalAge from '@modules/calculators/pages/GestationalAge'
+import IMC from '@modules/calculators/pages/IMC'
+import Menopause from '@modules/calculators/pages/Menopause'
+import PAM from '@modules/calculators/pages/PAM'
+import SomnolenceEpworth from '@modules/calculators/pages/SomnolenceEpworth'
+import TotalBodyWater from '@modules/calculators/pages/TotalBodyWater'
+import CalculatorsHistory from '@modules/calculators/pages/CalculatorsHistory'
+
 export const Stack = createNativeStackNavigator<RouteParams>()
 
 export default function App() {
@@ -24,6 +37,19 @@ export default function App() {
     [MyHealthModule.Codes]: Codes,
     [MyHealthModule.Diary]: Diary,
     [MyHealthModule.Medicines]: Medicines,
+  }
+
+  const calculators: Record<string, any> = {
+    [AllCalculators.IMC]: IMC,
+    [AllCalculators.PAM]: PAM,
+    [AllCalculators.AlcoholInBlood]: AlcoholInBlood,
+    [AllCalculators.GestationalAge]: GestationalAge,
+    [AllCalculators.Menopause]: Menopause,
+    [AllCalculators.SomnolenceEpworth]: SomnolenceEpworth,
+    [AllCalculators.BodySurface]: BodySurface,
+    [AllCalculators.TotalBodyWater]: TotalBodyWater,
+    [AllCalculators.Calcium]: Calcium,
+    [AllCalculators.Calories]: Calories,
   }
 
   const TITLE_STYLES: Partial<NativeStackNavigationOptions> = {
@@ -83,6 +109,20 @@ export default function App() {
 
         {/* Telas do módulo de códigos */}
         <Stack.Screen name="Consulta" component={CodeQuery}></Stack.Screen>
+
+        {/* Telas do módulo de Calculadoras */}
+        {Object.values(AllCalculators).map((calculator) => (
+          <Stack.Screen
+            key={calculator}
+            name={calculator}
+            component={calculators[calculator]}
+          ></Stack.Screen>
+        ))}
+        <Stack.Screen
+          name="CalculatorsHistory"
+          component={CalculatorsHistory}
+          options={{ title: 'Histórico de Calculadoras' }}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )
