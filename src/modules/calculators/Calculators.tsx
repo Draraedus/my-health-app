@@ -4,9 +4,9 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { MyHealthModule } from '../../modules'
 import { RouteParams } from '../../routeParams'
 
-import { CalculatorCard } from './components/CalculatorCard'
 import { AllCalculators } from './calculatorsEnum'
-import HistoryButton from './components/HistoryButton'
+import { MenuCalculatorItem } from './components/MenuCalculatorItem'
+import MenuHistoryButton from './components/MenuHistoryButton'
 import { useRef } from 'react'
 
 type CalculatorsProps = NativeStackScreenProps<
@@ -45,15 +45,15 @@ export default function Calculators(props: CalculatorsProps) {
         <View>
           <View style={styles.modulesContainer}>
             {calculators.map((calculatorName) => (
-              <CalculatorCard
+              <MenuCalculatorItem
                 key={calculatorName}
                 calculatorName={calculatorName}
-              ></CalculatorCard>
+              ></MenuCalculatorItem>
             ))}
           </View>
         </View>
       </ScrollView>
-      <HistoryButton />
+      <MenuHistoryButton />
     </>
   )
 }

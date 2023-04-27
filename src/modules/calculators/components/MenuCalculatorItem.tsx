@@ -9,7 +9,17 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import { Navigation } from 'src/routeParams'
 import { AllCalculators } from '../calculatorsEnum'
 
-export function CalculatorCard(props: { calculatorName: AllCalculators }) {
+/**
+ * Esse componente retorna um botão customizado utilizado
+ * no menu de calculadoras, o uso dele é na iteração de .map
+ * para renderizar botões selecionavéis das calculadoras existentes.
+ *
+ * @usage
+ * ```tsx
+ * <MenuCalculatorItem calculatorName=''  />
+ * ```
+ */
+export function MenuCalculatorItem(props: { calculatorName: AllCalculators }) {
   const navigation = useNavigation<Navigation>()
 
   const [backgroundColor, setBackgroundColor] = useState('#ffffff')

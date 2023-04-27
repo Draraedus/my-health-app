@@ -5,7 +5,16 @@ import { FontAwesome } from '@expo/vector-icons'
 import { useState } from 'react'
 import { globalStyles } from '@shared/ui/globalStyles'
 
-export default function DescriptionContainer(props: any) {
+/**
+ * Esse componente retorna um container com a descrição da
+ * calculadora desejada, necessário apenas passar a string de descrição.
+ *
+ * @usage
+ * ```tsx
+ * <CalculatorDescription description="" />
+ * ```
+ */
+export default function CalculatorDescription(props: any) {
   const [showDescription, setshowDescription] = useState(false)
 
   const handlePress = () => {

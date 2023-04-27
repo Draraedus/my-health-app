@@ -2,7 +2,17 @@ import { GRAY_300, GREEN_600 } from '@shared/ui/colors'
 import { StyledText } from '@shared/ui/components'
 import { StyleSheet, View } from 'react-native'
 
-export default function TittleContainer(props: any) {
+/**
+ * Esse componente retorna um container com o título
+ * da calculadora, necessário passar apenas a string
+ * do título.
+ *
+ * @usage
+ * ```tsx
+ * <CalculatorTittle name=''  />
+ * ```
+ */
+export default function CalculatorTittle(props: any) {
   return (
     <View style={[styles.container]}>
       <StyledText style={styles.tittleText}>{props.name}</StyledText>

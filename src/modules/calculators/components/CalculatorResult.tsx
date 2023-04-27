@@ -1,9 +1,22 @@
-import { GRAY_300, GREEN_600 } from '@shared/ui/colors'
-import { StyledText, TextBox, TextButton } from '@shared/ui/components'
-import { globalStyles } from '@shared/ui/globalStyles'
 import { View, StyleSheet } from 'react-native'
 
-export default function ResultCalculateContainer(props: any) {
+import { StyledText, TextBox, TextButton } from '@shared/ui/components'
+
+import { GRAY_300, GREEN_600 } from '@shared/ui/colors'
+import { globalStyles } from '@shared/ui/globalStyles'
+
+/**
+ * Esse componente retorna um container já com o resultado,
+ * a descrição do resultado e um botão para salvá-lo,
+ * sendo necessário passar pelas props a variável de resultado
+ * desejada e a descrição desejada em tipo string.
+ *
+ * @usage
+ * ```tsx
+ * <CalculatorResult result="" resultDescription="" />
+ * ```
+ */
+export default function CalculatorResult(props: any) {
   return (
     <View
       style={[

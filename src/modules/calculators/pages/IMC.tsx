@@ -1,28 +1,29 @@
 import { useRef, useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RouteParams } from '../../../routeParams'
 
 import { globalStyles } from '@shared/ui/globalStyles'
+import { GRAY_300, GREEN_600 } from '@shared/ui/colors'
+
 import { TextBox, TextButton } from '@shared/ui/components'
+import TittleContainer from '../components/CalculatorTittle'
+import DescriptionContainer from '../components/CalculatorDescription'
+import { CalculatorFormField } from '../components/CalculatorFormField'
+import ResultCalculateContainer from '../components/CalculatorResult'
 
 import { AllCalculators } from '../calculatorsEnum'
-import { RouteParams } from '../../../routeParams'
-import TittleContainer from '../components/TittleContainer'
-import DescriptionContainer from '../components/DescriptionContainer'
 import IMCCalculator from '../models/calculators/IMCCalculator'
-import { GRAY_300, GRAY_900, GREEN_600 } from '@shared/ui/colors'
-import { FormFieldCalculator } from '../components/FormFieldCalculator'
-import ResultCalculateContainer from '../components/ResultCalculateContainer'
 
 type CalculatorsProps = NativeStackScreenProps<RouteParams, AllCalculators.IMC>
 
 export default function IMC(props: CalculatorsProps) {
+  const imc = new IMCCalculator()
+
   const [weight, setWeight] = useState(0)
   const [height, setHeight] = useState(0)
   const [result, setResult] = useState(0)
   const [resultDescription, setResultDescription] = useState('')
-
-  const imc = new IMCCalculator()
 
   const scrollViewRef = useRef<ScrollView>(null)
 
@@ -52,22 +53,22 @@ export default function IMC(props: CalculatorsProps) {
       <TittleContainer name={AllCalculators.IMC} />
       <DescriptionContainer description={imc.description} />
       <View style={[styles.imcCalculateContainer, globalStyles.marginTop4]}>
-        <FormFieldCalculator label="Peso: (KG)">
+        <CalculatorFormField label="Peso: (KG)">
           <TextBox
             style={styles.textBoxStyle}
             keyboardType="numeric"
             onChangeText={(text) => setWeight(parseFloat(text))}
             placeholder="Ex.: 50"
           />
-        </FormFieldCalculator>
-        <FormFieldCalculator label="Altura: (M)">
+        </CalculatorFormField>
+        <CalculatorFormField label="Altura: (M)">
           <TextBox
             style={styles.textBoxStyle}
             keyboardType="numeric"
             onChangeText={(text) => setHeight(parseFloat(text))}
             placeholder="Ex.: 1.75"
           />
-        </FormFieldCalculator>
+        </CalculatorFormField>
         <TextButton
           style={[styles.buttonCalculate, globalStyles.marginTop3]}
           onPress={calculateImc}

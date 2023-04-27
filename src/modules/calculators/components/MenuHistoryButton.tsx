@@ -7,7 +7,16 @@ import { GREEN_600 } from '@shared/ui/colors'
 
 import { Navigation } from 'src/routeParams'
 
-export default function HistoryButton() {
+/**
+ * Esse componente retorna o botão de histórico das calculadoras,
+ * é um botão fixado na parte inferior direita da tela
+ *
+ * @usage
+ * ```tsx
+ * <MenuCalculatorItem calculatorName=''  />
+ * ```
+ */
+export default function MenuHistoryButton() {
   const navigation = useNavigation<Navigation>()
 
   return (
