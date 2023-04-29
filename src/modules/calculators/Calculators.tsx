@@ -16,14 +16,9 @@ type CalculatorsProps = NativeStackScreenProps<
 
 export default function Calculators(props: CalculatorsProps) {
   const calculators: AllCalculators[] = [
-    AllCalculators.Calories,
-    AllCalculators.Menopause,
     AllCalculators.IMC,
-    AllCalculators.SomnolenceEpworth,
-    AllCalculators.GestationalAge,
     AllCalculators.PAM,
     AllCalculators.AlcoholInBlood,
-    AllCalculators.Calcium,
     AllCalculators.BodySurface,
     AllCalculators.TotalBodyWater,
   ]

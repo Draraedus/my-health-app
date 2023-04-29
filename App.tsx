@@ -19,13 +19,8 @@ import { GREEN_700 } from './src/shared/ui/colors'
 import { AllCalculators } from '@modules/calculators/calculatorsEnum'
 import AlcoholInBlood from '@modules/calculators/pages/AlcoholInBlood'
 import BodySurface from '@modules/calculators/pages/BodySurface'
-import Calcium from '@modules/calculators/pages/Calcium'
-import Calories from '@modules/calculators/pages/Calories'
-import GestationalAge from '@modules/calculators/pages/GestationalAge'
 import IMC from '@modules/calculators/pages/IMC'
-import Menopause from '@modules/calculators/pages/Menopause'
 import PAM from '@modules/calculators/pages/PAM'
-import SomnolenceEpworth from '@modules/calculators/pages/SomnolenceEpworth'
 import TotalBodyWater from '@modules/calculators/pages/TotalBodyWater'
 import CalculatorsHistory from '@modules/calculators/pages/CalculatorsHistory'
 
@@ -43,13 +38,8 @@ export default function App() {
     [AllCalculators.IMC]: IMC,
     [AllCalculators.PAM]: PAM,
     [AllCalculators.AlcoholInBlood]: AlcoholInBlood,
-    [AllCalculators.GestationalAge]: GestationalAge,
-    [AllCalculators.Menopause]: Menopause,
-    [AllCalculators.SomnolenceEpworth]: SomnolenceEpworth,
     [AllCalculators.BodySurface]: BodySurface,
     [AllCalculators.TotalBodyWater]: TotalBodyWater,
-    [AllCalculators.Calcium]: Calcium,
-    [AllCalculators.Calories]: Calories,
   }
 
   const TITLE_STYLES: Partial<NativeStackNavigationOptions> = {

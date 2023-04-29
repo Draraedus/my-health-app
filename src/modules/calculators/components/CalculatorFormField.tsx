@@ -1,5 +1,6 @@
 import { View, Text, ViewProps, StyleSheet } from 'react-native'
 import { PropsWithChildren } from 'react'
+import { StyledText } from '@shared/ui/components'
 
 /**
  * Um campo qualquer de um formulário. Exibe a label do campo,
@@ -18,7 +19,7 @@ export function CalculatorFormField(
 ) {
   return (
     <View {...props}>
-      <Text style={styles.label}>{props.label}</Text>
+      <StyledText style={styles.label}>{props.label}</StyledText>
       {props.children}
     </View>
   )

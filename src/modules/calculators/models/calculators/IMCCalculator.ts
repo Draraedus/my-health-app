@@ -1,12 +1,12 @@
 import HealthCalculator from './HealthCalculators'
 
 export default class IMCCalculator implements HealthCalculator {
-  height: number
-  weight: number
+  protected height: number
+  protected weight: number
 
-  date: Date
-  result: number
-  description: string
+  public date: Date
+  public result: number
+  public description: string
 
   constructor() {
     this.height = 0
@@ -23,14 +23,11 @@ export default class IMCCalculator implements HealthCalculator {
   public setWeight(weight: number): void {
     this.weight = weight
   }
-  public setDate(date: Date): void {
-    this.date = date
-  }
 
-  calculate() {
+  public calculate() {
     this.result = this.weight / Math.pow(this.height, 2)
   }
-  saveResult(): void {}
+
   printResultDescription(): string {
     if (this.result < 18.5) {
       return 'O valor resultante foi abaixo de 18,5, o que indica pela tabela de IMC estar abaixo da massa corporal ideal'

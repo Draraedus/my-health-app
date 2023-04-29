@@ -13,13 +13,8 @@ export type RouteParams = {
   [AllCalculators.IMC]: NO_PARAMS
   [AllCalculators.PAM]: NO_PARAMS
   [AllCalculators.AlcoholInBlood]: NO_PARAMS
-  [AllCalculators.GestationalAge]: NO_PARAMS
-  [AllCalculators.Menopause]: NO_PARAMS
-  [AllCalculators.SomnolenceEpworth]: NO_PARAMS
   [AllCalculators.BodySurface]: NO_PARAMS
   [AllCalculators.TotalBodyWater]: NO_PARAMS
-  [AllCalculators.Calcium]: NO_PARAMS
-  [AllCalculators.Calories]: NO_PARAMS
   CalculatorsHistory: NO_PARAMS
 
   // Diário

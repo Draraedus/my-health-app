@@ -4,6 +4,5 @@ export default interface HealthCalculator {
   description: string
 
   calculate(): void
-  saveResult(date: Date, result: number): void
   printResultDescription(): string
 }
