@@ -37,8 +37,8 @@ export default function IMC(props: CalculatorsProps) {
   }
 
   function calculateImc() {
-    imc.weight = weight
-    imc.height = height
+    imc.setWeight(weight)
+    imc.setHeight(height)
     imc.calculate()
     setResultDescription(imc.printResultDescription())
     setResult(imc.result)
