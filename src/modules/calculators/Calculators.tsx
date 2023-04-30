@@ -38,7 +38,7 @@ export default function Calculators(props: CalculatorsProps) {
     <>
       <ScrollView onScroll={handleScroll} ref={scrollViewRef}>
         <View>
-          <View style={styles.modulesContainer}>
+          <View style={styles.rootContainer}>
             {calculators.map((calculatorName) => (
               <MenuCalculatorItem
                 key={calculatorName}
@@ -54,7 +54,7 @@ export default function Calculators(props: CalculatorsProps) {
 }
 
 const styles = StyleSheet.create({
-  modulesContainer: {
+  rootContainer: {
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',

@@ -20,9 +20,11 @@ const chartConfig = {
   backgroundGradientFromOpacity: 0,
   backgroundGradientTo: '#FFFFFF',
   backgroundGradientToOpacity: 0.5,
+
   color: () => GREEN_700,
   strokeWidth: 2,
   barPercentage: 0.5,
+
   useShadowColorFromDataset: false,
 }
 

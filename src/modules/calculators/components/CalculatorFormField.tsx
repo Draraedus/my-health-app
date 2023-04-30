@@ -27,9 +27,10 @@ export function CalculatorFormField(
 
 const styles = StyleSheet.create({
   label: {
+    marginBottom: 8,
+
     color: '#ffffff',
     fontWeight: '500',
     fontSize: 16,
-    marginBottom: 8,
   },
 })
