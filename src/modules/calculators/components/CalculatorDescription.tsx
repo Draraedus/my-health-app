@@ -22,7 +22,7 @@ export default function CalculatorDescription(props: any) {
   }
 
   return (
-    <View style={[styles.primaryContainer, globalStyles.marginTop4]}>
+    <View style={[styles.rootContainer, globalStyles.marginTop4]}>
       <View style={styles.descriptionIntroductionContainer}>
         <StyledText style={[styles.whiteText, styles.fontSize]}>
           Entenda Como Funciona
@@ -41,7 +41,7 @@ export default function CalculatorDescription(props: any) {
 }
 
 const styles = StyleSheet.create({
-  primaryContainer: {
+  rootContainer: {
     width: '80%',
     display: 'flex',
     flexDirection: 'column',

@@ -2,7 +2,7 @@ import { View, StyleSheet } from 'react-native'
 
 import { StyledText, TextBox, TextButton } from '@shared/ui/components'
 
-import { GRAY_300, GREEN_600 } from '@shared/ui/colors'
+import { GRAY_300, GRAY_900, GREEN_600 } from '@shared/ui/colors'
 import { globalStyles } from '@shared/ui/globalStyles'
 
 /**
@@ -33,7 +33,7 @@ export default function CalculatorResult(props: any) {
           value={props.result}
           style={styles.textBoxStyle}
         />
-        <TextButton style={styles.buttonSave}>Salvar</TextButton>
+        <TextButton style={styles.saveButton}>Salvar</TextButton>
       </View>
       <View
         style={[styles.resultDescriptionContainer, globalStyles.marginTop2]}
@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
     backgroundColor: GREEN_600,
   },
   resultContainer: {
-    height: 40,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    columnGap: 6,
     alignItems: 'center',
+    height: 40,
+    columnGap: 6,
   },
   resultDescriptionContainer: {},
   fontWhite: {
@@ -74,15 +74,20 @@ const styles = StyleSheet.create({
   textBoxStyle: {
     width: '30%',
     height: 32,
+
+    textAlign: 'center',
+    color: GRAY_900,
     backgroundColor: '#ffffff',
   },
-  buttonSave: {
+  saveButton: {
+    height: 36,
+    padding: 4,
+
+    borderRadius: 4,
+
     borderWidth: 2,
     borderColor: GRAY_300,
-    borderRadius: 4,
-    height: 36,
-    padding: 2,
-    outlineStyle: 'none',
+
     backgroundColor: '#ffffff',
   },
 })

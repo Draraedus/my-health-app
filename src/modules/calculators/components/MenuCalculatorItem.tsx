@@ -34,7 +34,7 @@ export function MenuCalculatorItem(props: { calculatorName: AllCalculators }) {
 
   return (
     <TouchableOpacity
-      style={[styles.container, { backgroundColor }]}
+      style={[styles.rootContainer, { backgroundColor }]}
       onPress={() => navigation.navigate(props.calculatorName)}
       onPressIn={handlePress}
       onPressOut={handleRelease}
@@ -47,7 +47,7 @@ export function MenuCalculatorItem(props: { calculatorName: AllCalculators }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     height: 108,
     display: 'flex',
     justifyContent: 'flex-start',
@@ -61,8 +61,9 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
   },
   icon: {
+    padding: 16,
+
     fontSize: 32,
     color: GREEN_500,
-    padding: 16,
   },
 })

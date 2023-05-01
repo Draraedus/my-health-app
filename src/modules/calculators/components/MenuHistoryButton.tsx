@@ -20,7 +20,7 @@ export default function MenuHistoryButton() {
   const navigation = useNavigation<Navigation>()
 
   return (
-    <View style={styles.container}>
+    <View style={styles.rootContainer}>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('CalculatorsHistory')}
@@ -32,7 +32,7 @@ export default function MenuHistoryButton() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     position: 'absolute',
     bottom: 20,
     right: 20,

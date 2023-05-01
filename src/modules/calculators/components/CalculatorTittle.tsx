@@ -14,14 +14,14 @@ import { StyleSheet, View } from 'react-native'
  */
 export default function CalculatorTittle(props: any) {
   return (
-    <View style={[styles.container]}>
-      <StyledText style={styles.tittleText}>{props.name}</StyledText>
+    <View style={[styles.rootContainer]}>
+      <StyledText style={styles.textTittle}>{props.name}</StyledText>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     marginTop: 16,
     paddingHorizontal: 32,
     paddingVertical: 8,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textAlign: 'center',
   },
-  tittleText: {
+  textTittle: {
     color: '#ffffff',
     fontSize: 16,
   },

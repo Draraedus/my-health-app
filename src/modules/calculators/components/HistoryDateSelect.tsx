@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
-import {
-  View,
-  Button,
-  Platform,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native'
-import DateTimePicker, { Event } from '@react-native-community/datetimepicker'
+import { View, Platform, TouchableOpacity, StyleSheet } from 'react-native'
+import DateTimePicker from '@react-native-community/datetimepicker'
 import { StyledText } from '@shared/ui/components'
 
 type HistoryDateSelectProps = {
@@ -30,9 +24,9 @@ export default function HistoryDateSelect(props: HistoryDateSelectProps) {
         onPress={() => setShowDatePicker(true)}
         style={styles.DateButton}
       >
-        <StyledText>{`${props.name}: ${props.date.toLocaleDateString(
-          'pt-BR'
-        )}`}</StyledText>
+        <StyledText>
+          {`${props.name}: ${props.date.toLocaleDateString('pt-BR')}`}
+        </StyledText>
       </TouchableOpacity>
       {showDatePicker && (
         <DateTimePicker
