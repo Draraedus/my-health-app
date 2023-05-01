@@ -57,7 +57,7 @@ export default function PAM(props: CalculatorsProps) {
     <ScrollView
       onScroll={handleScroll}
       ref={scrollViewRef}
-      contentContainerStyle={styles.primaryContainer}
+      contentContainerStyle={styles.rootContainer}
     >
       <TittleContainer name={AllCalculators.PAM} />
       <DescriptionContainer description={pam.description} />
@@ -120,7 +120,7 @@ export default function PAM(props: CalculatorsProps) {
 }
 
 const styles = StyleSheet.create({
-  primaryContainer: {
+  rootContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

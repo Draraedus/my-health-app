@@ -66,7 +66,7 @@ export default function BodySurface(props: CalculatorsProps) {
     <ScrollView
       onScroll={handleScroll}
       ref={scrollViewRef}
-      contentContainerStyle={styles.primaryContainer}
+      contentContainerStyle={styles.rootContainer}
     >
       <TittleContainer name={AllCalculators.BodySurface} />
       <DescriptionContainer description={bodySurface.description} />
@@ -122,7 +122,7 @@ export default function BodySurface(props: CalculatorsProps) {
   )
 }
 const styles = StyleSheet.create({
-  primaryContainer: {
+  rootContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

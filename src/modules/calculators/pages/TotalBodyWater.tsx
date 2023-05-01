@@ -72,7 +72,7 @@ export default function TotalBodyWater(props: CalculatorsProps) {
     <ScrollView
       onScroll={handleScroll}
       ref={scrollViewRef}
-      contentContainerStyle={styles.primaryContainer}
+      contentContainerStyle={styles.rootContainer}
     >
       <TittleContainer name={AllCalculators.TotalBodyWater} />
       <DescriptionContainer description={bodyWater.description} />
@@ -163,7 +163,7 @@ export default function TotalBodyWater(props: CalculatorsProps) {
 }
 
 const styles = StyleSheet.create({
-  primaryContainer: {
+  rootContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
