@@ -4,9 +4,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RouteParams } from '../../../routeParams'
 
 import { globalStyles } from '@shared/ui/globalStyles'
-import { GRAY_300, GREEN_600 } from '@shared/ui/colors'
 
-import { TextBox, TextButton } from '@shared/ui/components'
+import { StyledText, TextBox, TextButton } from '@shared/ui/components'
 import TittleContainer from '../components/CalculatorTittle'
 import DescriptionContainer from '../components/CalculatorDescription'
 import { CalculatorFormField } from '../components/CalculatorFormField'
@@ -14,6 +13,7 @@ import ResultCalculateContainer from '../components/CalculatorResult'
 
 import { AllCalculators } from '../calculatorsEnum'
 import PAMCalculator from '../models/calculators/PAMCalculator'
+import { calculatorStyles } from '../utils/calculatorStyles'
 
 type CalculatorsProps = NativeStackScreenProps<RouteParams, AllCalculators.PAM>
 
@@ -24,6 +24,8 @@ export default function PAM(props: CalculatorsProps) {
   const [pad, setPad] = useState(0)
   const [result, setResult] = useState(0)
   const [resultDescription, setResultDescription] = useState('')
+  const [errorPasMessage, setErrorPasMessage] = useState(false)
+  const [errorPadMessage, setErrorPadMessage] = useState(false)
 
   const scrollViewRef = useRef<ScrollView>(null)
 
@@ -37,11 +39,18 @@ export default function PAM(props: CalculatorsProps) {
   }
 
   function calculatePAM() {
-    pam.setPas(pas)
-    pam.setPad(pad)
-    pam.calculate()
-    setResultDescription(pam.printResultDescription())
-    setResult(pam.result)
+    if (Boolean(pas) && Boolean(pad)) {
+      setErrorPasMessage(false)
+      setErrorPadMessage(false)
+      pam.setPas(pas)
+      pam.setPad(pad)
+      pam.calculate()
+      setResultDescription(pam.printResultDescription())
+      setResult(pam.result)
+    } else {
+      Boolean(pas) ? setErrorPasMessage(false) : setErrorPasMessage(true)
+      Boolean(pad) ? setErrorPadMessage(false) : setErrorPadMessage(true)
+    }
   }
 
   return (
@@ -52,25 +61,49 @@ export default function PAM(props: CalculatorsProps) {
     >
       <TittleContainer name={AllCalculators.PAM} />
       <DescriptionContainer description={pam.description} />
-      <View style={[styles.pamCalculateContainer, globalStyles.marginTop4]}>
-        <CalculatorFormField label="PA Sistólica: (mmHg)">
-          <TextBox
-            style={styles.textBoxStyle}
-            keyboardType="numeric"
-            onChangeText={(text) => setPas(parseFloat(text))}
-            placeholder="Ex.: 85"
-          />
+      <View
+        style={[calculatorStyles.calculateContainer, globalStyles.marginTop4]}
+      >
+        <CalculatorFormField
+          label="PA Sistólica:"
+          style={calculatorStyles.width50}
+        >
+          <View style={calculatorStyles.calculateInputContainer}>
+            <TextBox
+              style={calculatorStyles.calculateInput}
+              keyboardType="numeric"
+              onChangeText={(text) => setPas(parseFloat(text))}
+              placeholder="Ex.: 85"
+            />
+            <StyledText style={calculatorStyles.whiteText}>mmHg</StyledText>
+          </View>
+          {errorPasMessage && (
+            <StyledText style={calculatorStyles.errorText}>
+              Pas inválida. Exemplo válido: 85
+            </StyledText>
+          )}
         </CalculatorFormField>
-        <CalculatorFormField label="PA Diastólica: (mmHg)">
-          <TextBox
-            style={styles.textBoxStyle}
-            keyboardType="numeric"
-            onChangeText={(text) => setPad(parseFloat(text))}
-            placeholder="Ex.: 130"
-          />
+        <CalculatorFormField
+          label="PA Diastólica:"
+          style={calculatorStyles.width50}
+        >
+          <View style={calculatorStyles.calculateInputContainer}>
+            <TextBox
+              style={calculatorStyles.calculateInput}
+              keyboardType="numeric"
+              onChangeText={(text) => setPad(parseFloat(text))}
+              placeholder="Ex.: 130"
+            />
+            <StyledText style={calculatorStyles.whiteText}>mmHg</StyledText>
+          </View>
+          {errorPadMessage && (
+            <StyledText style={calculatorStyles.errorText}>
+              Pad inválida. Exemplo válido: 130
+            </StyledText>
+          )}
         </CalculatorFormField>
         <TextButton
-          style={[styles.buttonCalculate, globalStyles.marginTop3]}
+          style={[calculatorStyles.calculateButton, globalStyles.marginTop3]}
           onPress={calculatePAM}
         >
           Calcular
@@ -92,32 +125,5 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  pamCalculateContainer: {
-    width: '80%',
-    padding: 32,
-
-    borderRadius: 10,
-
-    borderWidth: 1,
-    borderColor: GRAY_300,
-
-    backgroundColor: GREEN_600,
-  },
-  textBoxStyle: {
-    width: '40%',
-    backgroundColor: '#ffffff',
-  },
-  buttonCalculate: {
-    borderWidth: 2,
-    borderColor: GRAY_300,
-    borderRadius: 4,
-    width: '40%',
-    padding: 8,
-    outlineStyle: 'none',
-    backgroundColor: '#ffffff',
-  },
-  textWhite: {
-    color: '#ffffff',
   },
 })

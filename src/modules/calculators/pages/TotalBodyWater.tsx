@@ -4,9 +4,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RouteParams } from '../../../routeParams'
 
 import { globalStyles } from '@shared/ui/globalStyles'
-import { GRAY_300, GREEN_600 } from '@shared/ui/colors'
 
-import { TextBox, TextButton } from '@shared/ui/components'
+import { StyledText, TextBox, TextButton } from '@shared/ui/components'
 import TittleContainer from '../components/CalculatorTittle'
 import DescriptionContainer from '../components/CalculatorDescription'
 import { CalculatorFormField } from '../components/CalculatorFormField'
@@ -14,6 +13,8 @@ import ResultCalculateContainer from '../components/CalculatorResult'
 
 import { AllCalculators } from '../calculatorsEnum'
 import TotalBodyWaterCalculator from '../models/calculators/TotalBodyWaterCalculator'
+import { calculatorStyles } from '../utils/calculatorStyles'
+import { Picker } from '@react-native-picker/picker'
 
 type CalculatorsProps = NativeStackScreenProps<
   RouteParams,
@@ -25,8 +26,13 @@ export default function TotalBodyWater(props: CalculatorsProps) {
 
   const [weight, setWeight] = useState(0)
   const [height, setHeight] = useState(0)
+  const [age, setAge] = useState(0)
+  const [sex, setSex] = useState('Masculino' || 'Feminino')
   const [result, setResult] = useState(0)
   const [resultDescription, setResultDescription] = useState('')
+  const [errorHeightMessage, setErrorHeightMessage] = useState(false)
+  const [errorWeightMessage, setErrorWeightMessage] = useState(false)
+  const [errorAgeMessage, setErrorAgeMessage] = useState(false)
 
   const scrollViewRef = useRef<ScrollView>(null)
 
@@ -39,12 +45,27 @@ export default function TotalBodyWater(props: CalculatorsProps) {
     }
   }
 
-  function calculateImc() {
-    bodyWater.setWeight(weight)
-    bodyWater.setHeight(height)
-    bodyWater.calculate()
-    setResultDescription(bodyWater.printResultDescription())
-    setResult(bodyWater.result)
+  function bodyWaterCalculateHandler() {
+    if (Boolean(weight) && Boolean(height) && Boolean(age)) {
+      setErrorWeightMessage(false)
+      setErrorHeightMessage(false)
+      setErrorAgeMessage(false)
+      bodyWater.setWeight(weight)
+      bodyWater.setHeight(height)
+      bodyWater.setAge(age)
+      bodyWater.setSex(sex)
+      bodyWater.calculate()
+      setResultDescription(bodyWater.printResultDescription())
+      setResult(bodyWater.result)
+    } else {
+      Boolean(weight)
+        ? setErrorWeightMessage(false)
+        : setErrorWeightMessage(true)
+      Boolean(height)
+        ? setErrorHeightMessage(false)
+        : setErrorHeightMessage(true)
+      Boolean(age) ? setErrorAgeMessage(false) : setErrorAgeMessage(true)
+    }
   }
 
   return (
@@ -55,48 +76,78 @@ export default function TotalBodyWater(props: CalculatorsProps) {
     >
       <TittleContainer name={AllCalculators.TotalBodyWater} />
       <DescriptionContainer description={bodyWater.description} />
-      <View style={[styles.totalBodyWaterContainer, globalStyles.marginTop4]}>
-        <CalculatorFormField label="Altura:">
-          <TextBox
-            style={styles.textBoxStyle}
-            keyboardType="numeric"
-            onChangeText={(text) => setHeight(parseFloat(text))}
-            placeholder="Ex.: 1.75"
-          />
-        </CalculatorFormField>
-
-        <View style={[styles.secondContainer, globalStyles.marginTop4]}>
-          <CalculatorFormField label="Sexo:">
+      <View
+        style={[calculatorStyles.calculateContainer, globalStyles.marginTop4]}
+      >
+        <CalculatorFormField label="Altura:" style={calculatorStyles.width50}>
+          <View style={calculatorStyles.calculateInputContainer}>
             <TextBox
-              style={styles.textBoxStyle}
+              style={calculatorStyles.calculateInput}
               keyboardType="numeric"
               onChangeText={(text) => setHeight(parseFloat(text))}
-              placeholder="Ex.: 1.75"
+              placeholder="Ex.: 175"
             />
-          </CalculatorFormField>
-        </View>
-
-        <CalculatorFormField label="Idade:">
-          <TextBox
-            style={styles.textBoxStyle}
-            keyboardType="numeric"
-            onChangeText={(text) => setWeight(parseFloat(text))}
-            placeholder="Ex.: 50"
-          />
+            <StyledText style={calculatorStyles.whiteText}>Cm</StyledText>
+          </View>
         </CalculatorFormField>
-
-        <CalculatorFormField label="Peso: (KG)">
-          <TextBox
-            style={styles.textBoxStyle}
-            keyboardType="numeric"
-            onChangeText={(text) => setWeight(parseFloat(text))}
-            placeholder="Ex.: 50"
-          />
+        {errorHeightMessage && (
+          <StyledText style={calculatorStyles.errorText}>
+            Altura inválida. Exemplo válido: 175
+          </StyledText>
+        )}
+        <CalculatorFormField label="Sexo:" style={calculatorStyles.width50}>
+          <Picker
+            selectedValue={sex}
+            onValueChange={(itemValue) => setSex(itemValue)}
+            style={calculatorStyles.pickerStyle}
+          >
+            <Picker.Item
+              key={'Masculino'}
+              label={'Masculino'}
+              value={'Masculino'}
+            />
+            <Picker.Item
+              key={'Feminino'}
+              label={'Feminino'}
+              value={'Feminino'}
+            />
+          </Picker>
         </CalculatorFormField>
-
+        <CalculatorFormField label="Idade:" style={calculatorStyles.width50}>
+          <View style={calculatorStyles.calculateInputContainer}>
+            <TextBox
+              style={calculatorStyles.calculateInput}
+              keyboardType="numeric"
+              onChangeText={(text) => setAge(parseFloat(text))}
+              placeholder="Ex.: 50"
+            />
+            <StyledText style={calculatorStyles.whiteText}>Anos</StyledText>
+          </View>
+          {errorAgeMessage && (
+            <StyledText style={calculatorStyles.errorText}>
+              Idade inválida. Exemplo válido: 18
+            </StyledText>
+          )}
+        </CalculatorFormField>
+        <CalculatorFormField label="Peso:" style={calculatorStyles.width50}>
+          <View style={calculatorStyles.calculateInputContainer}>
+            <TextBox
+              style={calculatorStyles.calculateInput}
+              keyboardType="numeric"
+              onChangeText={(text) => setWeight(parseFloat(text))}
+              placeholder="Ex.: 50"
+            />
+            <StyledText style={calculatorStyles.whiteText}>Kg</StyledText>
+          </View>
+          {errorWeightMessage && (
+            <StyledText style={calculatorStyles.errorText}>
+              Peso inválido. Exemplo válido: 50
+            </StyledText>
+          )}
+        </CalculatorFormField>
         <TextButton
-          style={[styles.buttonCalculate, globalStyles.marginTop3]}
-          onPress={calculateImc}
+          style={[calculatorStyles.calculateButton, globalStyles.marginTop3]}
+          onPress={bodyWaterCalculateHandler}
         >
           Calcular
         </TextButton>
@@ -117,39 +168,5 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  secondContainer: {
-    display: 'flex',
-    flexDirection: 'column-reverse',
-    alignItems: 'flex-end',
-    justifyContent: 'space-evenly',
-    alignContent: 'space-around',
-  },
-  totalBodyWaterContainer: {
-    width: '80%',
-    padding: 32,
-
-    borderRadius: 10,
-
-    borderWidth: 1,
-    borderColor: GRAY_300,
-
-    backgroundColor: GREEN_600,
-  },
-  textBoxStyle: {
-    width: '40%',
-    backgroundColor: '#ffffff',
-  },
-  buttonCalculate: {
-    borderWidth: 2,
-    borderColor: GRAY_300,
-    borderRadius: 4,
-    width: '40%',
-    padding: 8,
-    outlineStyle: 'none',
-    backgroundColor: '#ffffff',
-  },
-  textWhite: {
-    color: '#ffffff',
   },
 })

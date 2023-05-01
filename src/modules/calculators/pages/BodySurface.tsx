@@ -4,9 +4,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RouteParams } from '../../../routeParams'
 
 import { globalStyles } from '@shared/ui/globalStyles'
-import { GRAY_300, GREEN_600 } from '@shared/ui/colors'
 
-import { TextBox, TextButton } from '@shared/ui/components'
+import { StyledText, TextBox, TextButton } from '@shared/ui/components'
 import TittleContainer from '../components/CalculatorTittle'
 import DescriptionContainer from '../components/CalculatorDescription'
 import { CalculatorFormField } from '../components/CalculatorFormField'
@@ -14,6 +13,7 @@ import ResultCalculateContainer from '../components/CalculatorResult'
 
 import { AllCalculators } from '../calculatorsEnum'
 import BodySurfaceCalculator from '../models/calculators/BodySurfaceCalculator'
+import { calculatorStyles } from '../utils/calculatorStyles'
 
 type CalculatorsProps = NativeStackScreenProps<
   RouteParams,
@@ -27,6 +27,8 @@ export default function BodySurface(props: CalculatorsProps) {
   const [height, setHeight] = useState(0)
   const [result, setResult] = useState(0)
   const [resultDescription, setResultDescription] = useState('')
+  const [errorHeightMessage, setErrorHeightMessage] = useState(false)
+  const [errorWeightMessage, setErrorWeightMessage] = useState(false)
 
   const scrollViewRef = useRef<ScrollView>(null)
 
@@ -39,12 +41,25 @@ export default function BodySurface(props: CalculatorsProps) {
     }
   }
 
-  function calculateBodySurface() {
-    bodySurface.setWeight(weight)
-    bodySurface.setHeight(height)
-    bodySurface.calculate()
-    setResultDescription(bodySurface.printResultDescription())
-    setResult(bodySurface.result)
+  function bodySurfaceCalculateHandler() {
+    if ((isNaN(weight) || weight === 0) && (isNaN(height) || height === 0)) {
+      setErrorWeightMessage(true)
+      setErrorHeightMessage(true)
+    } else if (isNaN(weight) || weight === 0) {
+      setErrorHeightMessage(false)
+      setErrorWeightMessage(true)
+    } else if (isNaN(height) || height === 0) {
+      setErrorWeightMessage(false)
+      setErrorHeightMessage(true)
+    } else {
+      setErrorWeightMessage(false)
+      setErrorHeightMessage(false)
+      bodySurface.setWeight(weight)
+      bodySurface.setHeight(height)
+      bodySurface.calculate()
+      setResultDescription(bodySurface.printResultDescription())
+      setResult(bodySurface.result)
+    }
   }
 
   return (
@@ -56,27 +71,43 @@ export default function BodySurface(props: CalculatorsProps) {
       <TittleContainer name={AllCalculators.BodySurface} />
       <DescriptionContainer description={bodySurface.description} />
       <View
-        style={[styles.bodySurfaceCalculateContainer, globalStyles.marginTop4]}
+        style={[calculatorStyles.calculateContainer, globalStyles.marginTop4]}
       >
-        <CalculatorFormField label="Peso: (KG)">
-          <TextBox
-            style={styles.textBoxStyle}
-            keyboardType="numeric"
-            onChangeText={(text) => setWeight(parseFloat(text))}
-            placeholder="Ex.: 50"
-          />
+        <CalculatorFormField label="Peso:" style={calculatorStyles.width50}>
+          <View style={calculatorStyles.calculateInputContainer}>
+            <TextBox
+              style={calculatorStyles.calculateInput}
+              keyboardType="numeric"
+              onChangeText={(text) => setWeight(parseFloat(text))}
+              placeholder="Ex.: 50"
+            />
+            <StyledText style={calculatorStyles.whiteText}>Kg</StyledText>
+          </View>
+          {errorWeightMessage && (
+            <StyledText style={calculatorStyles.errorText}>
+              Peso inválido. Exemplo válido: 50
+            </StyledText>
+          )}
         </CalculatorFormField>
-        <CalculatorFormField label="Altura: (M)">
-          <TextBox
-            style={styles.textBoxStyle}
-            keyboardType="numeric"
-            onChangeText={(text) => setHeight(parseFloat(text))}
-            placeholder="Ex.: 1.75"
-          />
+        <CalculatorFormField label="Altura:" style={calculatorStyles.width50}>
+          <View style={calculatorStyles.calculateInputContainer}>
+            <TextBox
+              style={calculatorStyles.calculateInput}
+              keyboardType="numeric"
+              onChangeText={(text) => setHeight(parseFloat(text))}
+              placeholder="Ex.: 1.75"
+            />
+            <StyledText style={calculatorStyles.whiteText}>M</StyledText>
+          </View>
+          {errorHeightMessage && (
+            <StyledText style={calculatorStyles.errorText}>
+              Peso inválido. Exemplo válido: 50
+            </StyledText>
+          )}
         </CalculatorFormField>
         <TextButton
-          style={[styles.buttonCalculate, globalStyles.marginTop3]}
-          onPress={calculateBodySurface}
+          style={[calculatorStyles.calculateButton, globalStyles.marginTop3]}
+          onPress={bodySurfaceCalculateHandler}
         >
           Calcular
         </TextButton>
@@ -96,32 +127,5 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  bodySurfaceCalculateContainer: {
-    width: '80%',
-    padding: 32,
-
-    borderRadius: 10,
-
-    borderWidth: 1,
-    borderColor: GRAY_300,
-
-    backgroundColor: GREEN_600,
-  },
-  textBoxStyle: {
-    width: '40%',
-    backgroundColor: '#ffffff',
-  },
-  buttonCalculate: {
-    borderWidth: 2,
-    borderColor: GRAY_300,
-    borderRadius: 4,
-    width: '40%',
-    padding: 8,
-    outlineStyle: 'none',
-    backgroundColor: '#ffffff',
-  },
-  textWhite: {
-    color: '#ffffff',
   },
 })

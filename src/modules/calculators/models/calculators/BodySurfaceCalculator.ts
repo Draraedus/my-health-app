@@ -30,10 +30,6 @@ export default class BodySurfaceCalculator implements HealthCalculator {
   }
 
   printResultDescription(): string {
-    if (this.result > -1) {
-      return 'É sua superfície corporal em metros quadrados.'
-    } else {
-      return ''
-    }
+    return 'É sua superfície corporal em metros quadrados.'
   }
 }

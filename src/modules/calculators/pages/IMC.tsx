@@ -4,7 +4,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RouteParams } from '../../../routeParams'
 
 import { globalStyles } from '@shared/ui/globalStyles'
-import { GRAY_300, GREEN_600, RED_500 } from '@shared/ui/colors'
 
 import { StyledText, TextBox, TextButton } from '@shared/ui/components'
 import TittleContainer from '../components/CalculatorTittle'
@@ -14,6 +13,7 @@ import ResultCalculateContainer from '../components/CalculatorResult'
 
 import { AllCalculators } from '../calculatorsEnum'
 import IMCCalculator from '../models/calculators/IMCCalculator'
+import { calculatorStyles } from '../utils/calculatorStyles'
 
 type CalculatorsProps = NativeStackScreenProps<RouteParams, AllCalculators.IMC>
 
@@ -67,41 +67,43 @@ export default function IMC(props: CalculatorsProps) {
     >
       <TittleContainer name={AllCalculators.IMC} />
       <DescriptionContainer description={imc.description} />
-      <View style={[styles.imcCalculateContainer, globalStyles.marginTop4]}>
-        <CalculatorFormField label="Peso:" style={{ width: '50%' }}>
-          <View style={styles.calculateInputContainer}>
+      <View
+        style={[calculatorStyles.calculateContainer, globalStyles.marginTop4]}
+      >
+        <CalculatorFormField label="Peso:" style={calculatorStyles.width50}>
+          <View style={calculatorStyles.calculateInputContainer}>
             <TextBox
-              style={styles.calculateInput}
+              style={calculatorStyles.calculateInput}
               keyboardType="numeric"
               onChangeText={(text) => setWeight(parseFloat(text))}
               placeholder="Ex.: 50"
             />
-            <StyledText style={styles.whiteText}>KG</StyledText>
+            <StyledText style={calculatorStyles.whiteText}>Kg</StyledText>
           </View>
           {errorWeightMessage && (
-            <StyledText style={styles.errorText}>
+            <StyledText style={calculatorStyles.errorText}>
               Peso inválido. Exemplo válido: 50
             </StyledText>
           )}
         </CalculatorFormField>
-        <CalculatorFormField label="Altura:" style={{ width: '50%' }}>
-          <View style={styles.calculateInputContainer}>
+        <CalculatorFormField label="Altura:" style={calculatorStyles.width50}>
+          <View style={calculatorStyles.calculateInputContainer}>
             <TextBox
-              style={styles.calculateInput}
+              style={calculatorStyles.calculateInput}
               keyboardType="numeric"
               onChangeText={(text) => setHeight(parseFloat(text))}
               placeholder="Ex.: 1.75"
             />
-            <StyledText style={styles.whiteText}>M</StyledText>
+            <StyledText style={calculatorStyles.whiteText}>M</StyledText>
           </View>
           {errorHeightMessage && (
-            <StyledText style={styles.errorText}>
+            <StyledText style={calculatorStyles.errorText}>
               Altura inválida. Exemplo válido: 1.75
             </StyledText>
           )}
         </CalculatorFormField>
         <TextButton
-          style={[styles.calculateButton, globalStyles.marginTop3]}
+          style={[calculatorStyles.calculateButton, globalStyles.marginTop3]}
           onPress={imcCalculateHandler}
         >
           Calcular
@@ -123,50 +125,5 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  imcCalculateContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    rowGap: 8,
-    width: '80%',
-    padding: 32,
-
-    borderRadius: 10,
-
-    borderWidth: 1,
-    borderColor: GRAY_300,
-
-    backgroundColor: GREEN_600,
-  },
-  calculateInputContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    columnGap: 4,
-  },
-  calculateInput: {
-    backgroundColor: '#ffffff',
-  },
-  calculateButton: {
-    width: '40%',
-    alignSelf: 'center',
-    textAlign: 'center',
-    padding: 8,
-
-    borderRadius: 4,
-
-    borderWidth: 2,
-    borderColor: GRAY_300,
-
-    backgroundColor: '#ffffff',
-  },
-  whiteText: {
-    fontSize: 14,
-    color: '#ffffff',
-  },
-  errorText: {
-    color: RED_500,
-    fontSize: 14,
-    fontWeight: 'bold',
   },
 })
