@@ -4,13 +4,14 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RouteParams } from '../../../routeParams'
 import { globalStyles } from '@shared/ui/globalStyles'
 import { GRAY_300, GREEN_600 } from '@shared/ui/colors'
-import { TextBox, TextButton } from '@shared/ui/components'
+import { StyledText, TextBox, TextButton } from '@shared/ui/components'
 import TittleContainer from '../components/CalculatorTittle'
 import DescriptionContainer from '../components/CalculatorDescription'
 import { CalculatorFormField } from '../components/CalculatorFormField'
 import ResultCalculateContainer from '../components/CalculatorResult'
 import { AllCalculators } from '../calculatorsEnum'
 import AlcoholCalculator from '../models/calculators/AlcoholCalculator'
+import { calculatorStyles } from '../utils/calculatorStyles'
 
 type CalculatorsProps = NativeStackScreenProps<
   RouteParams,
@@ -20,11 +21,14 @@ type CalculatorsProps = NativeStackScreenProps<
 export default function AlcoholInBlood(props: CalculatorsProps) {
   const alcohol = new AlcoholCalculator()
 
-  const [weight, setWeight] = useState(0)
-  const [volume, setVolume] = useState(0)
-  const [percentual, setPercentual] = useState(0)
-  const [result, setResult] = useState(0)
+  const [weight, setWeight] = useState(NaN)
+  const [volume, setVolume] = useState(NaN)
+  const [percentual, setPercentual] = useState(NaN)
+  const [result, setResult] = useState(NaN)
   const [resultDescription, setResultDescription] = useState('')
+  const [errorWeightMessage, setErrorWeightMessage] = useState(false)
+  const [errorVolumeMessage, setErrorVolumeMessage] = useState(false)
+  const [errorPercentualMessage, setErrorPercentualMessage] = useState(false)
 
   const scrollViewRef = useRef<ScrollView>(null)
 
@@ -38,12 +42,27 @@ export default function AlcoholInBlood(props: CalculatorsProps) {
   }
 
   function calculateAlcoholInBlood() {
-    alcohol.setWeight(weight)
-    alcohol.setPercentual(percentual)
-    alcohol.setVolume(volume)
-    alcohol.calculate()
-    setResultDescription(alcohol.printResultDescription())
-    setResult(alcohol.result)
+    if (Boolean(weight) && !isNaN(volume) && !isNaN(percentual)) {
+      setErrorWeightMessage(false)
+      setErrorVolumeMessage(false)
+      setErrorPercentualMessage(false)
+      alcohol.setWeight(weight)
+      alcohol.setPercentual(percentual)
+      alcohol.setVolume(volume)
+      alcohol.calculate()
+      setResultDescription(alcohol.printResultDescription())
+      setResult(alcohol.result)
+    } else {
+      Boolean(weight)
+        ? setErrorWeightMessage(false)
+        : setErrorWeightMessage(true)
+      !isNaN(volume)
+        ? setErrorVolumeMessage(false)
+        : setErrorVolumeMessage(true)
+      !isNaN(percentual)
+        ? setErrorPercentualMessage(false)
+        : setErrorPercentualMessage(true)
+    }
   }
 
   return (
@@ -55,29 +74,59 @@ export default function AlcoholInBlood(props: CalculatorsProps) {
       <TittleContainer name={AllCalculators.AlcoholInBlood} />
       <DescriptionContainer description={alcohol.description} />
       <View style={[styles.alcoholCalculateContainer, globalStyles.marginTop4]}>
-        <CalculatorFormField label="Peso: (kg)">
-          <TextBox
-            style={styles.textBoxStyle}
-            keyboardType="numeric"
-            onChangeText={(text) => setWeight(parseFloat(text))}
-            placeholder="Ex.: 50"
-          />
+        <CalculatorFormField label="Peso:" style={calculatorStyles.width50}>
+          <View style={calculatorStyles.calculateInputContainer}>
+            <TextBox
+              style={styles.textBoxStyle}
+              keyboardType="numeric"
+              onChangeText={(text) => setWeight(parseFloat(text))}
+              placeholder="Ex.: 50"
+            />
+            <StyledText style={calculatorStyles.whiteText}>Kg</StyledText>
+          </View>
+          {errorWeightMessage && (
+            <StyledText style={calculatorStyles.errorText}>
+              Peso inválido. Exemplo válido: 50
+            </StyledText>
+          )}
         </CalculatorFormField>
-        <CalculatorFormField label="Volume Ingerido: (ml)">
-          <TextBox
-            style={styles.textBoxStyle}
-            keyboardType="numeric"
-            onChangeText={(text) => setVolume(parseFloat(text))}
-            placeholder="Ex.: 1000"
-          />
+        <CalculatorFormField
+          label="Volume Ingerido:"
+          style={calculatorStyles.width50}
+        >
+          <View style={calculatorStyles.calculateInputContainer}>
+            <TextBox
+              style={styles.textBoxStyle}
+              keyboardType="numeric"
+              onChangeText={(text) => setVolume(parseFloat(text))}
+              placeholder="Ex.: 1000"
+            />
+            <StyledText style={calculatorStyles.whiteText}>ml</StyledText>
+          </View>
+          {errorVolumeMessage && (
+            <StyledText style={calculatorStyles.errorText}>
+              Volume inválido. Exemplo válido: 1000
+            </StyledText>
+          )}
         </CalculatorFormField>
-        <CalculatorFormField label="Percentual do Teor Álcoolico: (%)">
-          <TextBox
-            style={styles.textBoxStyle}
-            keyboardType="numeric"
-            onChangeText={(text) => setPercentual(parseFloat(text))}
-            placeholder="Ex.: 5"
-          />
+        <CalculatorFormField
+          label="Percentual do Teor Álcoolico:"
+          style={calculatorStyles.width50}
+        >
+          <View style={calculatorStyles.calculateInputContainer}>
+            <TextBox
+              style={styles.textBoxStyle}
+              keyboardType="numeric"
+              onChangeText={(text) => setPercentual(parseFloat(text))}
+              placeholder="Ex.: 5.4"
+            />
+            <StyledText style={calculatorStyles.whiteText}>%</StyledText>
+          </View>
+          {errorPercentualMessage && (
+            <StyledText style={calculatorStyles.errorText}>
+              Altura inválida. Exemplo válido: 5.4
+            </StyledText>
+          )}
         </CalculatorFormField>
         <TextButton
           style={[styles.buttonCalculate, globalStyles.marginTop3]}
@@ -86,7 +135,7 @@ export default function AlcoholInBlood(props: CalculatorsProps) {
           Calcular
         </TextButton>
       </View>
-      {result !== 0 && (
+      {!isNaN(result) && (
         <ResultCalculateContainer
           result={result.toFixed(1).toString()}
           resultDescription={resultDescription}

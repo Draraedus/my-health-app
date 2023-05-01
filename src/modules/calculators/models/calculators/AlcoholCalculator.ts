@@ -34,14 +34,16 @@ export default class AlcoholCalculator implements HealthCalculator {
   }
 
   printResultDescription(): string {
-    if (this.result <= 100) {
+    if (this.result === 0.0) {
+      return 'O valor resultante está igual ou menor que 0mg/dl, ou seja, é estimado que não houve nenhum consumo alcoolico e assim não há intoxicação.'
+    } else if (this.result > 0 && this.result <= 100) {
       return 'O valor resultante está abaixo dos 100 mg/dl, o que indica uma Intoxicação/Consumo leve. Alguns dos sintomas possíveis são o déficit de atenção e memória, vermelhidão na pele e batimentos cardíacos acelerados.'
     } else if (this.result > 100 && this.result <= 250) {
       return 'O valor resultante está entre 100 e 250mg/dl, o que indica uma Intoxicação/Consumo moderado. Alguns dos sintomas possíveis são a instabilidade física e do humor, tontura, náuseas e vômitos, amnésia.'
     } else if (this.result > 250 && this.result <= 400) {
       return 'O valor resultante está entre 250 e 400mg/dl, o que indica uma Intoxicação/Consumo grave. Alguns dos sintomas possíveis são a hipotermia, tontura severa, dificuldade na fala, além de delírios e alucinações.'
     } else if (this.result > 400) {
-      return 'O valor resultante está acima de 400ng/dl, o que indica uma Intoxicação/Consumo potencialmente fatal. Nesse estado, o paciente pode apresentar um coma potencial, convulsão, perda de consciência e habilidades motoras, insuficiência respiratória, e até mesmo lesões fatais.'
+      return 'O valor resultante está acima de 400mg/dl, o que indica uma Intoxicação/Consumo potencialmente fatal. Nesse estado, o paciente pode apresentar um coma potencial, convulsão, perda de consciência e habilidades motoras, insuficiência respiratória, e até mesmo lesões fatais.'
     } else {
       return ''
     }
