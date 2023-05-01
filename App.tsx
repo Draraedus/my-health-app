@@ -42,6 +42,7 @@ export default function App() {
     [MyHealthModule.Codes]: Codes,
     [MyHealthModule.Diary]: Diary,
     [MyHealthModule.Medicines]: Medicines,
+    [MyHealthModule.Articles]: Article,
   }
 
   const calculators: Record<string, any> = {
