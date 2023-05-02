@@ -111,6 +111,8 @@ export default function PAM(props: CalculatorsProps) {
       </View>
       {result !== 0 && (
         <ResultCalculateContainer
+          calculatorName={AllCalculators.PAM}
+          data={new Date().toLocaleDateString('pt-BR')}
           result={result.toFixed(2).toString()}
           resultDescription={resultDescription}
         />

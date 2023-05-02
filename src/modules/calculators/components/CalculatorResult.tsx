@@ -4,6 +4,7 @@ import { StyledText, TextBox, TextButton } from '@shared/ui/components'
 
 import { GRAY_300, GRAY_900, GREEN_600 } from '@shared/ui/colors'
 import { globalStyles } from '@shared/ui/globalStyles'
+import saveButtonHandler from '../services/saveButtonHandler'
 
 /**
  * Esse componente retorna um container já com o resultado,
@@ -16,7 +17,15 @@ import { globalStyles } from '@shared/ui/globalStyles'
  * <CalculatorResult result="" resultDescription="" />
  * ```
  */
-export default function CalculatorResult(props: any) {
+
+type CalculatorResultProps = {
+  calculatorName: string
+  result: string
+  data: string
+  resultDescription: string
+}
+
+export default function CalculatorResult(props: CalculatorResultProps) {
   return (
     <View
       style={[
@@ -30,10 +39,21 @@ export default function CalculatorResult(props: any) {
         <TextBox
           editable={false}
           keyboardType="numeric"
-          value={props.result}
+          value={props.result.toString()}
           style={styles.textBoxStyle}
         />
-        <TextButton style={styles.saveButton}>Salvar</TextButton>
+        <TextButton
+          style={styles.saveButton}
+          onPress={() =>
+            saveButtonHandler(
+              props.calculatorName,
+              props.data,
+              parseFloat(props.result)
+            )
+          }
+        >
+          Salvar
+        </TextButton>
       </View>
       <View
         style={[styles.resultDescriptionContainer, globalStyles.marginTop2]}

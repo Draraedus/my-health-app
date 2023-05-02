@@ -3,16 +3,12 @@ import { View } from 'react-native'
 import { LineChart } from 'react-native-chart-kit'
 import { Dimensions } from 'react-native'
 import { GREEN_700 } from '@shared/ui/colors'
+import { CalculatorsData } from '../interface/CalculatorsData'
 
 const screenWidth = Dimensions.get('window').width
 
-type DataPoint = {
-  date: Date
-  result: number
-}
-
 type LineChartProps = {
-  points: DataPoint[]
+  points: CalculatorsData[]
 }
 
 const chartConfig = {
@@ -30,7 +26,7 @@ const chartConfig = {
 
 export default function HistoryChart(props: LineChartProps) {
   const chartData = {
-    labels: props.points.map((point) => point.date.toLocaleDateString('pt-BR')),
+    labels: props.points.map((point) => point.data),
     datasets: [
       {
         data: props.points.map((point) => point.result),

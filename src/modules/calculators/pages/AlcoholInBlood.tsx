@@ -138,6 +138,8 @@ export default function AlcoholInBlood(props: CalculatorsProps) {
       </View>
       {!isNaN(result) && (
         <ResultCalculateContainer
+          calculatorName={AllCalculators.AlcoholInBlood}
+          data={new Date().toLocaleDateString('pt-BR')}
           result={result.toFixed(1).toString()}
           resultDescription={resultDescription}
         />

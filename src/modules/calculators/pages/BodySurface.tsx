@@ -114,6 +114,8 @@ export default function BodySurface(props: CalculatorsProps) {
       </View>
       {result !== 0 && (
         <ResultCalculateContainer
+          calculatorName={AllCalculators.BodySurface}
+          data={new Date().toLocaleDateString('pt-BR')}
           result={result.toFixed(3).toString()}
           resultDescription={resultDescription}
         />

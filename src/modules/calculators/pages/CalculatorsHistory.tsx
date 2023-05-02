@@ -13,6 +13,8 @@ import { Picker } from '@react-native-picker/picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import DateTimePickerExample from '../components/HistoryDateSelect'
 import HistoryChart from '../components/HistoryGrafic'
+import { CalculatorsData } from '../interface/CalculatorsData'
+import getHistory from '../services/getHistory'
 
 type CalculatorHistoryProps = NativeStackScreenProps<
   RouteParams,
@@ -28,13 +30,14 @@ export default function CalculatorsHistory(props: CalculatorHistoryProps) {
     AllCalculators.TotalBodyWater,
   ]
 
-  const [calculatorSelectedValue, setCalculatorSelectedValue] = useState('IMC')
+  const [calculatorSelectedValue, setCalculatorSelectedValue] = useState(
+    AllCalculators.IMC
+  )
   const [initialDate, setInitialDate] = useState(new Date())
   const [finalDate, setFinalDate] = useState(new Date())
-
-  const handleChange = (event: any) => {
-    console.log(event)
-  }
+  const [calculatorHistory, setCalculatorHistory] = useState<CalculatorsData[]>(
+    []
+  )
 
   const scrollViewRef = useRef<ScrollView>(null)
 
@@ -78,19 +81,23 @@ export default function CalculatorsHistory(props: CalculatorHistoryProps) {
             date={finalDate}
             setDate={setFinalDate}
           />
-          <TouchableOpacity style={styles.HistoryConfirmButton}>
+          <TouchableOpacity
+            style={styles.HistoryConfirmButton}
+            onPress={() =>
+              getHistory(
+                calculatorSelectedValue,
+                initialDate.toLocaleDateString('pt-BR'),
+                finalDate.toLocaleDateString('pt-BR'),
+                setCalculatorHistory
+              )
+            }
+          >
             <StyledText style={styles.TextGreen}>Confirmar</StyledText>
           </TouchableOpacity>
         </View>
-        <HistoryChart
-          points={[
-            { date: new Date(2022, 2, 1), result: 12 },
-            { date: new Date(2022, 2, 2), result: 25 },
-            { date: new Date(2022, 2, 3), result: 30 },
-            { date: new Date(2022, 2, 4), result: 28 },
-            { date: new Date(2022, 2, 5), result: 34 },
-          ]}
-        />
+        {calculatorHistory.length !== 0 && (
+          <HistoryChart points={calculatorHistory} />
+        )}
       </View>
     </ScrollView>
   )
