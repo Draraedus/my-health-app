@@ -72,12 +72,12 @@ export default function CalculatorsHistory(props: CalculatorHistoryProps) {
             </Picker>
           </CalculatorFormField>
           <DateTimePickerExample
-            name="Data Inicio"
+            name="Data Inicial"
             date={initialDate}
             setDate={setInitialDate}
           />
           <DateTimePickerExample
-            name="Data Fim"
+            name="Data Final"
             date={finalDate}
             setDate={setFinalDate}
           />

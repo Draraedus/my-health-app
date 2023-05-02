@@ -4,7 +4,10 @@ import { StyledText, TextBox, TextButton } from '@shared/ui/components'
 
 import { GRAY_300, GRAY_900, GREEN_600 } from '@shared/ui/colors'
 import { globalStyles } from '@shared/ui/globalStyles'
-import saveButtonHandler from '../services/saveButtonHandler'
+import saveCalculations from '../services/saveCalculators'
+import getCalculations from '../services/getCalculators'
+import { CalculatorsData } from '../interface/CalculatorsData'
+import { useToastActions } from '@shared/ui/components/toast/ToastProvider'
 
 /**
  * Esse componente retorna um container já com o resultado,
@@ -26,6 +29,24 @@ type CalculatorResultProps = {
 }
 
 export default function CalculatorResult(props: CalculatorResultProps) {
+  const toast = useToastActions()
+
+  const saveButtonHandler = async (
+    calcullatorName: string,
+    data: string,
+    result: number
+  ) => {
+    try {
+      const calculation: CalculatorsData = { result, data }
+      const calculators = await getCalculations(calcullatorName)
+      calculators.push(calculation)
+      await saveCalculations(calcullatorName, calculators)
+      toast.success('Resultado salvo com sucesso!')
+    } catch (e) {
+      toast.error('Não foi possível salvar o resultado')
+    }
+  }
+
   return (
     <View
       style={[

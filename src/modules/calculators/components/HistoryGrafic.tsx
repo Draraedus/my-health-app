@@ -4,6 +4,7 @@ import { LineChart } from 'react-native-chart-kit'
 import { Dimensions } from 'react-native'
 import { GREEN_700 } from '@shared/ui/colors'
 import { CalculatorsData } from '../interface/CalculatorsData'
+import HistoryLineChartDot from './HistoryLineChartDot'
 
 const screenWidth = Dimensions.get('window').width
 
@@ -46,6 +47,9 @@ export default function HistoryChart(props: LineChartProps) {
         chartConfig={chartConfig}
         withInnerLines={false}
         verticalLabelRotation={70}
+        renderDotContent={({ x, y, index }) => (
+          <HistoryLineChartDot index={index} points={props.points} />
+        )}
       />
     </View>
   )
