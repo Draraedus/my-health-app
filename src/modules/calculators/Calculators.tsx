@@ -9,6 +9,8 @@ import { MenuCalculatorItem } from './components/MenuCalculatorItem'
 import MenuHistoryButton from './components/MenuHistoryButton'
 import { useRef } from 'react'
 
+// Author: Adriel Luiz Santana dos Santos
+
 type CalculatorsProps = NativeStackScreenProps<
   RouteParams,
   MyHealthModule.Calculators

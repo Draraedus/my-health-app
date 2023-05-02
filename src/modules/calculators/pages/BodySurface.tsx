@@ -15,6 +15,8 @@ import { AllCalculators } from '../calculatorsEnum'
 import BodySurfaceCalculator from '../models/calculators/BodySurfaceCalculator'
 import { calculatorStyles } from '../utils/calculatorStyles'
 
+// Author: Gabriel Marques Costa
+
 type CalculatorsProps = NativeStackScreenProps<
   RouteParams,
   AllCalculators.BodySurface

@@ -1,5 +1,7 @@
 import HealthCalculator from './HealthCalculators'
 
+// Author: Gabriel Marques Costa
+
 export default class PAMCalculator implements HealthCalculator {
   protected pas: number
   protected pad: number

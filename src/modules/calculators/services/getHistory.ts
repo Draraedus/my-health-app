@@ -1,6 +1,8 @@
 import { CalculatorsData } from '../interface/CalculatorsData'
 import getCalculations from './getCalculators'
 
+// Author: Jean Charles de Jesus
+
 function isDateStringInRange(
   dateStringToCheck: string,
   startDateString: string,

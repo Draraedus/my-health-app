@@ -1,5 +1,7 @@
 import HealthCalculator from './HealthCalculators'
 
+// Author: Gabriel Marques Costa
+
 export default class TotalBodyWaterCalculator implements HealthCalculator {
   protected height: number
   protected weight: number

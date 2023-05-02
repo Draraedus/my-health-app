@@ -1,3 +1,5 @@
+// Author: Adriel Luiz Santana dos Santos
+
 export enum AllCalculators {
   IMC = 'Indice de Massa Corpórea',
   PAM = 'Pressão Arterial Média',

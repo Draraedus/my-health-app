@@ -2,6 +2,8 @@ import { View, Text, ViewProps, StyleSheet } from 'react-native'
 import { PropsWithChildren } from 'react'
 import { StyledText } from '@shared/ui/components'
 
+// Author: Adriel Luiz Santana dos Santos
+
 /**
  * Um campo qualquer de um formulário. Exibe a label do campo,
  * enquanto que o input deve ser passado como componente filho.

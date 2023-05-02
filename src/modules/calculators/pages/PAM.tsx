@@ -15,6 +15,8 @@ import { AllCalculators } from '../calculatorsEnum'
 import PAMCalculator from '../models/calculators/PAMCalculator'
 import { calculatorStyles } from '../utils/calculatorStyles'
 
+// Author: Gabriel Marques Costa
+
 type CalculatorsProps = NativeStackScreenProps<RouteParams, AllCalculators.PAM>
 
 export default function PAM(props: CalculatorsProps) {

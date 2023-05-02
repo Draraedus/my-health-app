@@ -5,6 +5,8 @@ import { FontAwesome } from '@expo/vector-icons'
 import { useState } from 'react'
 import { globalStyles } from '@shared/ui/globalStyles'
 
+// Author: Adriel Luiz Santana dos Santos
+
 /**
  * Esse componente retorna um container com a descrição da
  * calculadora desejada, necessário apenas passar a string de descrição.

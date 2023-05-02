@@ -9,6 +9,8 @@ import getCalculations from '../services/getCalculators'
 import { CalculatorsData } from '../interface/CalculatorsData'
 import { useToastActions } from '@shared/ui/components/toast/ToastProvider'
 
+// Author: Adriel Luiz Santana dos Santos
+
 /**
  * Esse componente retorna um container já com o resultado,
  * a descrição do resultado e um botão para salvá-lo,

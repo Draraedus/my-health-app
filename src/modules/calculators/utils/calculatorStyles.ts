@@ -1,6 +1,8 @@
 import { GRAY_300, GREEN_600, RED_500 } from '@shared/ui/colors'
 import { StyleSheet } from 'react-native'
 
+// Author: Adriel Luiz Santana dos Santos
+
 export const calculatorStyles = StyleSheet.create({
   width50: {
     width: '50%',

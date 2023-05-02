@@ -7,6 +7,8 @@ import { GREEN_600 } from '@shared/ui/colors'
 
 import { Navigation } from 'src/routeParams'
 
+// Author: Adriel Luiz Santana dos Santos
+
 /**
  * Esse componente retorna o botão de histórico das calculadoras,
  * é um botão fixado na parte inferior direita da tela

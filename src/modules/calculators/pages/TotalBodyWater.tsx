@@ -16,6 +16,8 @@ import TotalBodyWaterCalculator from '../models/calculators/TotalBodyWaterCalcul
 import { calculatorStyles } from '../utils/calculatorStyles'
 import { Picker } from '@react-native-picker/picker'
 
+// Author: Gabriel Marques Costa
+
 type CalculatorsProps = NativeStackScreenProps<
   RouteParams,
   AllCalculators.TotalBodyWater

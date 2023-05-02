@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { CalculatorsData } from '../interface/CalculatorsData'
 
+// Author: Jean Charles de Jesus
+
 const saveCalculations = async (
   calculatorName: string,
   calculations: CalculatorsData[]

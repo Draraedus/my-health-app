@@ -1,5 +1,7 @@
 import HealthCalculator from './HealthCalculators'
 
+// Author: Victor Hugo Santos Sá
+
 export default class AlcoholCalculator implements HealthCalculator {
   protected volume: number
   protected percentual: number

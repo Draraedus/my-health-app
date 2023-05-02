@@ -1,5 +1,7 @@
 import HealthCalculator from './HealthCalculators'
 
+// Author: Adriel Luiz Santana dos Santos
+
 export default class IMCCalculator implements HealthCalculator {
   protected height: number
   protected weight: number

@@ -6,6 +6,8 @@ import { GREEN_700 } from '@shared/ui/colors'
 import { CalculatorsData } from '../interface/CalculatorsData'
 import HistoryLineChartDot from './HistoryLineChartDot'
 
+// Author: Adriel Luiz Santana dos Santos
+
 const screenWidth = Dimensions.get('window').width
 
 type LineChartProps = {

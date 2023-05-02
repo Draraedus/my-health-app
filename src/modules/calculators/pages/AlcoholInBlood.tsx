@@ -12,6 +12,8 @@ import { AllCalculators } from '../calculatorsEnum'
 import AlcoholCalculator from '../models/calculators/AlcoholCalculator'
 import { calculatorStyles } from '../utils/calculatorStyles'
 
+// Author: Victor Hugo Santos Sá
+
 type CalculatorsProps = NativeStackScreenProps<
   RouteParams,
   AllCalculators.AlcoholInBlood

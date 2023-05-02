@@ -3,6 +3,8 @@ import { View, Platform, TouchableOpacity, StyleSheet } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { StyledText } from '@shared/ui/components'
 
+// Author: Adriel Luiz Santana dos Santos
+
 type HistoryDateSelectProps = {
   name: string
   date: Date

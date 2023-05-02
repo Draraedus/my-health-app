@@ -9,6 +9,8 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import { Navigation } from 'src/routeParams'
 import { AllCalculators } from '../calculatorsEnum'
 
+// Author: Adriel Luiz Santana dos Santos
+
 /**
  * Esse componente retorna um botão customizado utilizado
  * no menu de calculadoras, o uso dele é na iteração de .map

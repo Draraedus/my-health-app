@@ -3,11 +3,11 @@ import { StyleSheet, View, TouchableOpacity, ScrollView } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { globalStyles } from '@shared/ui/globalStyles'
-import { StyledText, TextBox, TextButton } from '@shared/ui/components'
+import { StyledText } from '@shared/ui/components'
 
 import { RouteParams } from '../../../routeParams'
 import { CalculatorFormField } from '../components/CalculatorFormField'
-import { GRAY_300, GRAY_600, GREEN_600 } from '@shared/ui/colors'
+import { GRAY_300, GREEN_600 } from '@shared/ui/colors'
 import { AllCalculators } from '../calculatorsEnum'
 import { Picker } from '@react-native-picker/picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -15,6 +15,8 @@ import DateTimePickerExample from '../components/HistoryDateSelect'
 import HistoryChart from '../components/HistoryGrafic'
 import { CalculatorsData } from '../interface/CalculatorsData'
 import getHistory from '../services/getHistory'
+
+// Author: Adriel Luiz Santana dos Santos
 
 type CalculatorHistoryProps = NativeStackScreenProps<
   RouteParams,

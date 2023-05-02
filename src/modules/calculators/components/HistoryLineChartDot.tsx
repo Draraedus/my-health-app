@@ -1,6 +1,8 @@
 import { View, Text } from 'react-native'
 import { CalculatorsData } from '../interface/CalculatorsData'
 
+// Author: Adriel Luiz Santana dos Santos
+
 type HistoryLineChartDotProps = {
   index: number
   points: CalculatorsData[]

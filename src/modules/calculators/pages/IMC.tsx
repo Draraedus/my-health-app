@@ -15,6 +15,8 @@ import { AllCalculators } from '../calculatorsEnum'
 import IMCCalculator from '../models/calculators/IMCCalculator'
 import { calculatorStyles } from '../utils/calculatorStyles'
 
+// Author: Adriel Luiz Santana dos Santos
+
 type CalculatorsProps = NativeStackScreenProps<RouteParams, AllCalculators.IMC>
 
 export default function IMC(props: CalculatorsProps) {
