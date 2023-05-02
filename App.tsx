@@ -7,13 +7,14 @@ import {
 import { Toast } from '@shared/ui/components/toast/Toast'
 import { useFonts } from 'expo-font'
 import { View } from 'react-native'
-
 import { MyHealthModule } from './src/modules'
 import Calculators from './src/modules/calculators/Calculators'
 import Codes from './src/modules/codes/Codes'
 import CodeQuery from './src/modules/codes/pages/Consulta'
 import Diary from './src/modules/diary/Diary'
 import Article from './src/modules/articles/Articles'
+import Profile from '@modules/profile/Profile'
+import EditProfile from '@modules/profile/pages/EditProfile'
 import { NewsForm } from './src/modules/articles/pages/PostArticle'
 import { Login } from './src/modules/login/pages/Login'
 import Medicines from './src/modules/medicines/Medicines'
@@ -24,7 +25,10 @@ import Home from '@modules/home/Home'
 import { LoadingInterceptor } from '@shared/ui/components/loading/LoadingInterceptor'
 import { useEffect, useState } from 'react'
 import { getSession } from '@shared/services/auth/session'
-
+import {
+  goToProfile,
+  goToEditProfile,
+} from './src/modules/profile/components/Button'
 import { AllCalculators } from '@modules/calculators/calculatorsEnum'
 import AlcoholInBlood from '@modules/calculators/pages/AlcoholInBlood'
 import BodySurface from '@modules/calculators/pages/BodySurface'
@@ -116,7 +120,7 @@ export default function App() {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{ title: 'My Health' }}
+              options={{ title: 'My Health', headerRight: goToProfile }}
             ></Stack.Screen>
 
             {/* Pontos de entrada dos módulos */}
@@ -146,6 +150,20 @@ export default function App() {
               name="PublishNews"
               component={NewsForm}
               options={{ title: 'Publicar notícia' }}
+            ></Stack.Screen>
+
+            {/* Tela de perfil */}
+            <Stack.Screen
+              name="Profile"
+              component={Profile}
+              options={{ title: 'Perfil', headerRight: goToEditProfile }}
+            ></Stack.Screen>
+
+            {/* Tela de editar perfil */}
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfile}
+              options={{ title: 'Editar Perfil' }}
             ></Stack.Screen>
 
             {/* Telas do módulo de Calculadoras */}
